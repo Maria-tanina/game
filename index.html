@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Workshop game</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+	<audio>
+		<source src="audio/bayraktar.mp3">
+	</audio>
+	<div id="video-bg">
+		
+	</div>
+
+	<div id="app">
+		<div id="game" style="display: none;">
+			<div id="lifes">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+
+			<div id="options">
+				<div id="score">
+					Score: <span>0</span>
+				</div>
+				<img src="images/dron.png" alt="">
+				<div id="sound">
+					<img src="images/mute_sound.png">
+				</div>
+			</div>
+
+			<div id="player" class="skin_1"></div>
+			<div class="items" style="display: none;">
+				<div class="item"><img src="images/items/item_1.png" alt=""></div>
+				<div class="item"><img src="images/items/item_2.png" alt=""></div>
+				<div class="item"><img src="images/items/item_3.png" alt=""></div>
+				<div class="item"><img src="images/items/item_4.png" alt=""></div>
+				<div class="item"><img src="images/items/item_5.png" alt=""></div>
+				<div class="item"><img src="images/items/item_6.png" alt=""></div>
+				<div class="item"><img src="images/items/item_7.png" alt=""></div>
+			</div>
+		</div>
+
+
+		<div id="start">
+			<h2>Обери гравця</h2>
+			<div id="select-player" class="clearfix">
+				<span class="selected" id="skin_1">
+					<img src="images/player_1.png">
+				</span>
+
+				<span id="skin_2">
+					<img src="images/player_2.png">
+				</span>
+			</div>
+			<button class="start__btn">Старт</button>
+		</div>
+		<div id="end" style="display: none;">
+			<h2>Ви програли</h2>
+			<h3>Your score: <span>30</span></h3>
+			<button class="start__btn">Restart</button>
+		</div>
+
+	</div>
+
+	<script src="main.js"></script>
+
+</body>
+
+</html>
