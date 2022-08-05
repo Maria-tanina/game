@@ -134,6 +134,14 @@
     background: red;
     color: white;
 }
+
+.items img {
+    position: absolute;
+    width: 5em;
+    height: 5em;
+}
+
+
 /*===
 Вспомогательные классы
 ===*/
