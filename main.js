@@ -8,12 +8,28 @@ let scorePoints = score.lastElementChild.innerText;
 let endGame = document.querySelector('#end');
 let scoreEnd = document.querySelector('#end h3 span');
 let restartBtn = document.querySelector('.restart__btn');
+let audioplayer = document.querySelector('audio');
+let source = document.querySelector('audio source');
+let soundBtn = document.querySelector('#sound img');
 
+
+var sound = 'off';
+soundBtn.onclick = function () {
+    if (sound == 'on') {
+        soundBtn.src = 'images/mute_sound.png';
+        sound = 'off';
+        audioplayer.pause();
+    } else {
+        soundBtn.src = 'images/sound.png';
+        sound = 'on';
+        audioplayer.play();
+    }
+};
 
 function random(min, max) {
     let rand;
-    rand = Math.random() * (max - min + 1) + min
-    return Math.floor(rand)
+    rand = Math.random() * (max - min + 1) + min;
+    return Math.floor(rand);
 };
 
 startBtn.onclick = function() {
@@ -92,7 +108,7 @@ function createItem(min, max, time) {
     let scorePoints = 0;
 
     fallItem(item, time);
-};
+}
 
 /* падение предмета. */
 function fallItem(item, time) {
@@ -107,7 +123,7 @@ function fallItem(item, time) {
             createItem(1, 7, 200);        // кидаем предметы снова
         }
         cacheItem(item)
-    }, time)
+    }, time);
 };
 
 /* ловим предмет */
@@ -134,5 +150,5 @@ function cacheItem(item) {
         }
     };
     scorePoints = score.lastElementChild.innerText;
-};
+}
 
