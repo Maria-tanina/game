@@ -1,3 +1,8 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 #game {
     display: none;
@@ -66,8 +71,8 @@
 #player {
     height: 270px;
     position: absolute;
-    top: 50%;
-    left: 40%;
+    top: 60%; /* при 50% сильно маленькое расстояние для полета предметов */
+    left: 40%; 
     -webkit-transition: all 0.2s;
     -moz-transition: all 0.2s;
     transition: all 0.2s;
@@ -93,7 +98,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     width: 640px;
-    height: 520px;
+    height: 560px; /* не влазила кнопка*/
     border-radius: 20px;
     text-align: center;
     padding: 2px 20px;
