@@ -113,7 +113,7 @@ function createItem(min, max, time) {
 /* падение предмета. */
 function fallItem(item, time) {
     let intID = setInterval(() => {
-        item.style.top = item.offsetTop + 35 +'px';
+        item.style.top = item.offsetTop + 15 +'px';
         
         if(item.offsetTop > window.outerHeight) {       // если не впоймал
             item.remove();
@@ -122,9 +122,9 @@ function fallItem(item, time) {
             createLifes();
             createItem(1, 7, 200);        // кидаем предметы снова
         }
-        cacheItem(item)
+        cacheItem(item);
     }, time);
-};
+}
 
 /* ловим предмет */
 function cacheItem(item) {
@@ -148,7 +148,7 @@ function cacheItem(item) {
                     score.lastElementChild.innerText = Number(scorePoints) + 1;
                     createItem(1, 7, 200)
         }
-    };
+    }
     scorePoints = score.lastElementChild.innerText;
 }
 
