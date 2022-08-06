@@ -160,11 +160,10 @@ function cacheItem(item) {
 /* строим байрактар */
 function bildPlain() {
     if(bird.offsetWidth >= 85) {
-        console.log(typeof(bird.offsetWidth))
         score.lastElementChild.innerText = Number(scorePoints) + 1;
         scorePoints = score.lastElementChild.innerText;
         bird.style.width = "0"
     } else {
-        bird.style.width = bird.offsetWidth + 9 +'px'
+        bird.style.width = bird.offsetWidth + 10 +'px'
     }
 }
