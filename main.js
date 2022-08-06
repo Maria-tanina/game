@@ -1,8 +1,8 @@
-
 var startBtn = document.querySelector('.start__btn');
 var gameBlock = document.querySelector('#game');
 var startBlock =  document.querySelector('#start');
 const player = document.getElementById('player');
+let countLifes = 3; // счетчик жизней
 var items = document.querySelector('.items');
 let scorePoints = score.lastElementChild.innerText;
 
@@ -20,9 +20,34 @@ startBtn.onclick = function() {
 function start() {
     startBlock.style.display = 'none';
     game.style.display = 'block';
+    createLifes();
     
     createItem(1, 7, 200)   // кидаем предметы
 };
+
+// функция создания жизней игрока
+function createLifes() {
+    let LifesBlock = document.querySelector("#lifes");
+        LifesBlock.innerHTML = "";      // очистка жизней
+    let count = 0;                 
+    while (count < countLifes) {        // создание жизней по циклу 
+
+        let span = document.createElement("span");
+        LifesBlock.appendChild(span);
+        count++;
+    }    
+};
+
+/* функция смерти игрока */
+function die() {
+    countLifes--;
+
+    if (countLifes <= 0)            // если жизни кончились
+    {   
+       alert("Жизни кончились");
+      //   EndGame();
+    }
+}
 
 /* выбор скина для персонажа */
 document.querySelectorAll("#select-player span img").forEach(
@@ -69,6 +94,8 @@ function fallItem(item, time) {
         if(item.offsetTop > window.outerHeight) {       // если не впоймал
             item.remove();
             clearInterval(intID);
+            die();
+            createLifes();
             createItem(1, 7, 200);        // кидаем предметы снова
         }
         cacheItem(item)
@@ -100,3 +127,4 @@ function cacheItem(item) {
     };
     scorePoints = score.lastElementChild.innerText;
 };
+
