@@ -127,3 +127,4 @@ function cacheItem(item) {
     };
     scorePoints = score.lastElementChild.innerText;
 };
+
