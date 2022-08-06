@@ -1,3 +1,4 @@
+
 var startBtn = document.querySelector('.start__btn');
 var gameBlock = document.querySelector('#game');
 var startBlock =  document.querySelector('#start');
@@ -39,9 +40,9 @@ document.querySelectorAll("#select-player span img").forEach(
 /* движуха персонажа */
 document.onkeydown = function(event) {
     if(event.code == "KeyA" && player.offsetLeft > 20) {
-        player.style.left = player.offsetLeft - 16 +"px"
+        player.style.left = player.offsetLeft - 16 +"px";
     } else if(event.code == "KeyD" && player.offsetLeft < event.target.clientWidth - 218) {
-        player.style.left = player.offsetLeft + 16 +"px"
+        player.style.left = player.offsetLeft + 16 +"px";
     }
 };
 
