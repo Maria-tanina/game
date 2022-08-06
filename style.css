@@ -62,7 +62,21 @@
 #options img {
     margin: 0 10px;
 }
-#options #sound,
+.bairactar {
+    width: 90px;
+    height: 68px;
+    overflow: hidden;
+}
+.bairactar img {
+    width: 80px;
+    height: 68px;
+}
+#options #sound {
+    width: 60px;
+    height: 40px;
+    position: absolute;
+    left: 230px;
+}
 #options #sound img {
     height: 100%;
 }

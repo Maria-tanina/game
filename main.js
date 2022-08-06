@@ -1,13 +1,18 @@
 var startBtn = document.querySelector('.start__btn');
 var gameBlock = document.querySelector('#game');
 var startBlock =  document.querySelector('#start');
+
 const player = document.getElementById('player');
-let countLifes = 3; // счетчик жизней
+let countLifes = 3;     // счетчик жизней
+
 var items = document.querySelector('.items');
 let scorePoints = score.lastElementChild.innerText;
+let bird = document.querySelector("#options .bairactar");       //байрактар
+bird.style.width = "0";
 let endGame = document.querySelector('#end');
 let scoreEnd = document.querySelector('#end h3 span');
 let restartBtn = document.querySelector('.restart__btn');
+
 let audioplayer = document.querySelector('audio');
 let source = document.querySelector('audio source');
 let soundBtn = document.querySelector('#sound img');
@@ -39,6 +44,7 @@ startBtn.onclick = function() {
 function start() {
     startBlock.style.display = 'none';
     game.style.display = 'block';
+    
     createLifes();
     
     createItem(1, 7, 200)   // кидаем предметы
@@ -134,8 +140,8 @@ function cacheItem(item) {
     {
         if(player.offsetLeft + 52 < item.offsetLeft +  (item.width / 2) &&
            item.offsetLeft +  (item.width / 2) < player.offsetLeft + 152) {
+            bildPlain();
             
-            score.lastElementChild.innerText = Number(scorePoints) + 1;
             createItem(1, 7, 200)
         }  
     } else if(player.className == "skin_2" &&                               // если скин 2
@@ -145,10 +151,20 @@ function cacheItem(item) {
                 if(player.offsetLeft + 115 < item.offsetLeft + (item.width / 2) &&
                    item.offsetLeft + (item.width / 2) < player.offsetLeft + 213) {
                     
-                    score.lastElementChild.innerText = Number(scorePoints) + 1;
+                    bildPlain();
                     createItem(1, 7, 200)
         }
     }
-    scorePoints = score.lastElementChild.innerText;
 }
 
+/* строим байрактар */
+function bildPlain() {
+    if(bird.offsetWidth >= 85) {
+        console.log(typeof(bird.offsetWidth))
+        score.lastElementChild.innerText = Number(scorePoints) + 1;
+        scorePoints = score.lastElementChild.innerText;
+        bird.style.width = "0"
+    } else {
+        bird.style.width = bird.offsetWidth + 9 +'px'
+    }
+}
