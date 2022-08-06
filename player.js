@@ -73,12 +73,6 @@ document.onkeydown = function(event)
 
 }
 
-
-
-
-
-
-=======
 // игрок
 player = document.querySelector("#player");
 playerSkin = "skin_1";
@@ -158,4 +152,4 @@ document.onkeydown = function(event)
 
 
 
->>>>>>> 6a544b0739b558a1bdfd7fd1f89c64e143e0bbc8
+
