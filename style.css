@@ -163,7 +163,7 @@
 }
 
 #start button:hover, #end button:hover {
-    background: red;
+    background:  yellow;
     color: white;
 }
 
@@ -171,6 +171,17 @@
     position: absolute;
     width: 5em;
     height: 5em;
+}
+
+/* Взрыв */
+.boom {
+    background: url(images/boom.gif);
+    position: absolute;
+    width: 480px;
+    height: 480px;
+    z-index: 9999;
+    top: 40%;
+    left: 50%;
 }
 
 

@@ -1,21 +1,26 @@
-var startBtn = document.querySelector('.start__btn');
-var gameBlock = document.querySelector('#game');
-var startBlock =  document.querySelector('#start');
+let script = document.createElement('script');
+script.src = "player.js";
+document.head.append(script);
 
-const player = document.getElementById('player');
-let countLifes = 3;     // счетчик жизней
+startBtn = document.querySelector('.start__btn');
+gameBlock = document.querySelector('#game');
+startBlock =  document.querySelector('#start');
+scoreBlock = document.querySelector("#score");
 
-var items = document.querySelector('.items');
-let scorePoints = score.lastElementChild.innerText;
-let bird = document.querySelector("#options .bairactar");       //байрактар
+// player = document.getElementById('player');
+// let countLifes = 3;     // счетчик жизней
+
+items = document.querySelector('.items');
+// let scorePoints = score.lastElementChild.innerText;
+bird = document.querySelector("#options .bairactar");       //байрактар
 bird.style.width = "0";
-let endGame = document.querySelector('#end');
-let scoreEnd = document.querySelector('#end h3 span');
-let restartBtn = document.querySelector('.restart__btn');
+endBlock = document.querySelector('#end');
+scoreEnd = document.querySelector('#end h3 span');
+restartBtn = document.querySelector('.restart__btn');
 
-let audioplayer = document.querySelector('audio');
-let source = document.querySelector('audio source');
-let soundBtn = document.querySelector('#sound img');
+audioplayer = document.querySelector('audio');
+source = document.querySelector('audio source');
+soundBtn = document.querySelector('#sound img');
 
 
 var sound = 'off';
@@ -38,21 +43,26 @@ function random(min, max) {
 };
 
 startBtn.onclick = function() {
+    startBlock.style.display = 'none';
+    gameBlock.style.display = 'block';
     start();
 };
 
 function start() {
-    startBlock.style.display = 'none';
-    game.style.display = 'block';
-    
-    createLifes();
-    
-    createItem(1, 7, 200)   // кидаем предметы
+    countLifes = 5; // счетчик жизней
+    countScore = 0; //количество очков
+    player.className = playerSkin; // skin игрока
+    createLifes(); // создание жизней игрока
+    createScore(countScore); // обновить очки
+
+    createItem(1, 7, 100)   // кидаем предметы
 };
 
-// функция создания жизней игрока
+/*/ функция создания жизней игрока
 function createLifes() {
     let LifesBlock = document.querySelector("#lifes");
+    console.dir(LifesBlock);
+
         LifesBlock.innerHTML = "";      // очистка жизней
     let count = 0;                 
     while (count < countLifes) {        // создание жизней по циклу 
@@ -63,23 +73,23 @@ function createLifes() {
     }    
 };
 
-/* функция смерти игрока */
+// функция смерти игрока 
 function die() {
     countLifes--;
 
     if (countLifes <= 0)            // если жизни кончились
     {   
         gameBlock.style.display = 'none';
-        endGame.style.display = 'block';
+        endBlock.style.display = 'block';
         scoreEnd.innerHTML = scorePoints;
-      //   EndGame();
+        EndGame();
     }
 }
 restartBtn.onclick = function() {
     location.reload();
 };
 
-/* выбор скина для персонажа */
+//выбор скина для персонажа 
 document.querySelectorAll("#select-player span img").forEach(
     el => el.onclick = function(e) {
         let selected = document.querySelector('.selected');
@@ -92,14 +102,16 @@ document.querySelectorAll("#select-player span img").forEach(
     }
 );
 
-/* движуха персонажа */
+// движуха персонажа 
 document.onkeydown = function(event) {
     if(event.code == "KeyA" && player.offsetLeft > 20) {
-        player.style.left = player.offsetLeft - 35 +"px";
+        player.style.left = player.offsetLeft - 100 +"px";
     } else if(event.code == "KeyD" && player.offsetLeft < event.target.clientWidth - 218) {
-        player.style.left = player.offsetLeft + 35 +"px";
+        player.style.left = player.offsetLeft + 100 +"px";
     }
 };
+*/
+
 
 /* создание предмета */
 function createItem(min, max, time) {
@@ -111,7 +123,7 @@ function createItem(min, max, time) {
     
     item.style.top = "-80px";
     item.style.left = random(214, window.innerWidth - 115) +"px";
-    let scorePoints = 0;
+    //let scorePoints = 0;
 
     fallItem(item, time);
 }
@@ -126,7 +138,7 @@ function fallItem(item, time) {
             clearInterval(intID);
             die();
             createLifes();
-            createItem(1, 7, 200);        // кидаем предметы снова
+            createItem(1, 7, 100);        // кидаем предметы снова
         }
         cacheItem(item);
     }, time);
@@ -134,15 +146,20 @@ function fallItem(item, time) {
 
 /* ловим предмет */
 function cacheItem(item) {
+    console.dir(item.offsetTop);
+    console.dir(item.offsetLeft);
+
     if(player.className == "skin_1" &&                                      // если скин 1
        player.offsetTop + 180 < item.offsetTop + (item.height / 2) &&
        item.offsetTop + (item.height / 2) < player.offsetTop + 195)
     {
         if(player.offsetLeft + 52 < item.offsetLeft +  (item.width / 2) &&
            item.offsetLeft +  (item.width / 2) < player.offsetLeft + 152) {
+            createScore(10);
+
             bildPlain();
-            
-            createItem(1, 7, 200)
+            createBoom(item.offsetLeft, item.offsetTop);
+            createItem(1, 7, 100)
         }  
     } else if(player.className == "skin_2" &&                               // если скин 2
               player.offsetTop + 124 < item.offsetTop + (item.height / 2) &&
@@ -150,9 +167,11 @@ function cacheItem(item) {
     {                
                 if(player.offsetLeft + 115 < item.offsetLeft + (item.width / 2) &&
                    item.offsetLeft + (item.width / 2) < player.offsetLeft + 213) {
-                    
+                    createScore(10);
+
                     bildPlain();
-                    createItem(1, 7, 200)
+                    createBoom(item.offsetLeft, item.offsetTop);
+                    createItem(1, 7, 100)
         }
     }
 }
@@ -166,4 +185,22 @@ function bildPlain() {
     } else {
         bird.style.width = bird.offsetWidth + 10 +'px'
     }
+}
+
+
+//конец игры
+function EndGame()
+{
+   scoreBlock.innerText = countScore + " очков";
+   endBlock.style.display = "block";
+
+   gameBlock.innerHTML = "" ; // обнуление окна игры
+
+   let restartButton = document.querySelector("#end button");
+   restartButton.onclick = restart;
+}
+
+function restart()
+{
+   location.reload() ;
 }
