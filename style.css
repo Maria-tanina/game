@@ -158,6 +158,12 @@
     height: 5em;
 }
 
+.boom {
+    background: url(images/boom.gif);
+    width: 150px;
+    height: 219px;
+    position: absolute;
+}
 
 /*===
 Вспомогательные классы
