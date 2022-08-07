@@ -62,7 +62,22 @@
 #options img {
     margin: 0 10px;
 }
-#options #sound,
+.bairactar {
+    width: 90px;
+    height: 68px;
+    overflow: hidden;
+    transition: width 1s;
+}
+.bairactar img {
+    width: 80px;
+    height: 68px;
+}
+#options #sound {
+    width: 60px;
+    height: 40px;
+    position: absolute;
+    left: 230px;
+}
 #options #sound img {
     height: 100%;
 }
@@ -148,7 +163,7 @@
 }
 
 #start button:hover, #end button:hover {
-    background: red;
+    background:  yellow;
     color: white;
 }
 
@@ -158,12 +173,26 @@
     height: 5em;
 }
 
+<<<<<<< HEAD
 .boom {
     background: url(images/boom.gif);
     width: 150px;
     height: 219px;
     position: absolute;
 }
+=======
+/* Взрыв */
+.boom {
+    background: url(images/boom.gif);
+    position: absolute;
+    width: 480px;
+    height: 480px;
+    z-index: 9999;
+    top: 40%;
+    left: 50%;
+}
+
+>>>>>>> ba12df351bd7eab08e7c7b79ad3b1d192ec1e5de
 
 /*===
 Вспомогательные классы
