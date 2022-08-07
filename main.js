@@ -1,13 +1,18 @@
 var startBtn = document.querySelector('.start__btn');
 var gameBlock = document.querySelector('#game');
 var startBlock = document.querySelector('#start');
+
 const player = document.getElementById('player');
 let countLifes = 3; // счетчик жизней
+
 var items = document.querySelector('.items');
 let scorePoints = score.lastElementChild.innerText;
+let bird = document.querySelector("#options .bairactar");       //байрактар
+bird.style.width = "0";
 let endGame = document.querySelector('#end');
 let scoreEnd = document.querySelector('#end h3 span');
 let restartBtn = document.querySelector('.restart__btn');
+
 let audioplayer = document.querySelector('audio');
 let source = document.querySelector('audio source');
 let soundBtn = document.querySelector('#sound img');
@@ -42,7 +47,7 @@ function start() {
     game.style.display = 'block';
     createLifes();
 
-    createItem(1, 7, 200); // кидаем предметы
+    createItem(1, 9, 200); // кидаем предметы
 };
 
 // функция создания жизней игрока
@@ -97,29 +102,31 @@ document.onkeydown = function (event) {
 };
 
 /* создание предмета */
-
 function createItem(min, max, time) {
     items.innerHTML = "";
     let rand = random(min, max);
     let item = document.createElement("img");
     item.setAttribute("src", "images/items/item_" + rand + ".png");
-    console.log(rand);
+    items.appendChild(item);
     if (rand == 8 || rand == 9) {
         item.setAttribute('class', 'bomb');
         console.dir(item);
     }
-    items.appendChild(item);
 
     item.style.top = "-80px";
     item.style.left = random(214, window.innerWidth - 115) + "px";
-    let scorePoints = 0;
 
     fallItem(item, time);
 }
+
 // создание boom 
-function createBoom(top, left) {
+function createBoom(top, left, isBoom) {
     var boom = document.createElement('div');
-    boom.className = 'boom';
+    if(isBoom == "boom") {
+        boom.className = 'boom';
+    } else {
+        boom.className = 'pshik';
+    }
     boom.style.top = top + 'px';
     boom.style.left = left + 'px';
     gameBlock.appendChild(boom);
@@ -133,7 +140,7 @@ function fallItem(item, time) {
     let intID = setInterval(() => {
         item.style.top = item.offsetTop + 15 + 'px';
 
-        if (item.offsetTop > window.outerHeight) { // если не впоймал
+        if (item.offsetTop > window.outerHeight) {      // если не впоймал
             item.remove();
             clearInterval(intID);
             if (item.className !== 'bomb') {
@@ -149,32 +156,48 @@ function fallItem(item, time) {
 
 /* ловим предмет */
 function cacheItem(item) {
-    if (player.className == "skin_1" && // если скин 1
-        player.offsetTop + 180 < item.offsetTop + (item.height / 2) &&
-        item.offsetTop + (item.height / 2) < player.offsetTop + 195) {
+    if (player.className == "skin_1" &&     // если скин 1
+        player.offsetTop + 175 < item.offsetTop + (item.height / 2) &&
+        item.offsetTop + (item.height / 2) < player.offsetTop + 190) {
 
         if (player.offsetLeft + 52 < item.offsetLeft + (item.width / 2) &&
             item.offsetLeft + (item.width / 2) < player.offsetLeft + 152 && item.className == '') {
-            score.lastElementChild.innerText = Number(scorePoints) + 1;
-            createItem(1, 9, 200);
-        } else if (player.offsetLeft + 52 < item.offsetLeft + (item.width / 2) && //если ловим бомбу
+            createBoom(item.offsetTop - 100, item.offsetLeft - 70);
+            bildPlain();
+            createItem(1, 9, 200)
+        } else if (player.offsetLeft + 52 < item.offsetLeft + (item.width / 2) &&   //если ловим бомбу
             item.offsetLeft + (item.width / 2) < player.offsetLeft + 152 && item.className == 'bomb') {
-            createBoom(item.offsetTop - 100, item.offsetLeft - 50);
+            createBoom(item.offsetTop - 100, item.offsetLeft - 50, "boom");
             die();
             createLifes();
             createItem(1, 9, 200);
-
         }
 
-    } else if (player.className == "skin_2" && // если скин 2
+    } else if (player.className == "skin_2" &&                          // если скин 2
         player.offsetTop + 124 < item.offsetTop + (item.height / 2) &&
         item.offsetTop + (item.height / 2) < player.offsetTop + 190) {
         if (player.offsetLeft + 115 < item.offsetLeft + (item.width / 2) &&
+            item.offsetLeft + (item.width / 2) < player.offsetLeft + 213 && item.className != 'bomb') {
+            createBoom(item.offsetTop - 100, item.offsetLeft - 70);
+            bildPlain();
+            createItem(1, 9, 200)
+        } else if (player.offsetLeft + 115 < item.offsetLeft + (item.width / 2) &&      //если ловим бомбу
             item.offsetLeft + (item.width / 2) < player.offsetLeft + 213) {
-
-            score.lastElementChild.innerText = Number(scorePoints) + 1;
+            createBoom(item.offsetTop - 100, item.offsetLeft - 50, "boom");
+            die();
+            createLifes();
             createItem(1, 9, 200);
         }
     }
-    scorePoints = score.lastElementChild.innerText;
+}
+
+/* строим байрактар */
+function bildPlain() {
+    if(bird.offsetWidth >= 85) {
+        score.lastElementChild.innerText = Number(scorePoints) + 1;
+        scorePoints = score.lastElementChild.innerText;
+        bird.style.width = "0"
+    } else {
+        bird.style.width = bird.offsetWidth + 10 +'px'
+    }
 }

@@ -173,10 +173,10 @@
     height: 5em;
 }
 
-.boom {
-    background: url(images/boom.gif);
-    width: 150px;
-    height: 219px;
+.pshik {
+    background: url(images/pshik.gif);
+    width: 180px;
+    height: 180px;
     position: absolute;
 }
 
