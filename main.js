@@ -111,8 +111,11 @@ function createItem(min, max, time) {
     if (rand == 8 || rand == 9) {
         item.setAttribute('class', 'bomb');
         console.dir(item);
+    } else  if(rand == 7) {
+        item.setAttribute('class', 'addlife');
     }
 
+   
     item.style.top = "-80px";
     item.style.left = random(214, window.innerWidth - 115) + "px";
 
@@ -164,11 +167,16 @@ function cacheItem(item) {
             item.offsetLeft + (item.width / 2) < player.offsetLeft + 152 && item.className == '') {
             createBoom(item.offsetTop - 100, item.offsetLeft - 70);
             bildPlain();
-            createItem(1, 9, 200)
+            createItem(1, 9, 200);
         } else if (player.offsetLeft + 52 < item.offsetLeft + (item.width / 2) &&   //если ловим бомбу
             item.offsetLeft + (item.width / 2) < player.offsetLeft + 152 && item.className == 'bomb') {
             createBoom(item.offsetTop - 100, item.offsetLeft - 50, "boom");
             die();
+            createLifes();
+            createItem(1, 9, 200);
+        } else if (player.offsetLeft + 52 < item.offsetLeft + (item.width / 2) &&
+        item.offsetLeft + (item.width / 2) < player.offsetLeft + 152 && item.className == 'addlife') {
+            countLifes++;
             createLifes();
             createItem(1, 9, 200);
         }
@@ -196,7 +204,7 @@ function bildPlain() {
     if(bird.offsetWidth >= 85) {
         score.lastElementChild.innerText = Number(scorePoints) + 1;
         scorePoints = score.lastElementChild.innerText;
-        bird.style.width = "0"
+        bird.style.width = "0";
     } else {
         bird.style.width = bird.offsetWidth + 10 +'px'
     }
