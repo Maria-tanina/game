@@ -3,7 +3,8 @@ var gameBlock = document.querySelector('#game');
 var startBlock = document.querySelector('#start');
 
 const player = document.getElementById('player');
-let countLifes = 3; // счетчик жизней
+let countLifes = 5; // счетчик жизней
+let itemTime = 200; // время предметов
 
 var items = document.querySelector('.items');
 let scorePoints = score.lastElementChild.innerText;
@@ -47,7 +48,7 @@ function start() {
     game.style.display = 'block';
     createLifes();
 
-    createItem(1, 9, 200); // кидаем предметы
+    createItem(1, 9, itemTime); // кидаем предметы
 };
 
 // функция создания жизней игрока
@@ -95,9 +96,9 @@ document.querySelectorAll("#select-player span img").forEach(
 /* движуха персонажа */
 document.onkeydown = function (event) {
     if (event.code == "KeyA" && player.offsetLeft > 20) {
-        player.style.left = player.offsetLeft - 35 + "px";
+        player.style.left = player.offsetLeft - 100 + "px";
     } else if (event.code == "KeyD" && player.offsetLeft < event.target.clientWidth - 218) {
-        player.style.left = player.offsetLeft + 35 + "px";
+        player.style.left = player.offsetLeft + 100 + "px";
     }
 };
 
@@ -150,7 +151,7 @@ function fallItem(item, time) {
                 die();
                 createLifes();
             }
-            createItem(1, 9, 200); // кидаем предметы снова
+            createItem(1, 9, itemTime); // кидаем предметы снова
 
         }
         cacheItem(item);
@@ -167,19 +168,19 @@ function cacheItem(item) {
             item.offsetLeft + (item.width / 2) < player.offsetLeft + 152 && item.className == '') {
             createBoom(item.offsetTop - 100, item.offsetLeft - 70);
             bildPlain();
-            createItem(1, 9, 200);
+            createItem(1, 9, itemTime);
         } else if (player.offsetLeft + 52 < item.offsetLeft + (item.width / 2) &&   //если ловим бомбу
             item.offsetLeft + (item.width / 2) < player.offsetLeft + 152 && item.className == 'bomb') {
             createBoom(item.offsetTop - 100, item.offsetLeft - 50, "boom");
             die();
             createLifes();
-            createItem(1, 9, 200);
+            createItem(1, 9, itemTime);
         } else if (player.offsetLeft + 52 < item.offsetLeft + (item.width / 2) &&
         item.offsetLeft + (item.width / 2) < player.offsetLeft + 152 && item.className == 'addlife') {
             createBoom(item.offsetTop - 100, item.offsetLeft - 70);
             countLifes++;
             createLifes();
-            createItem(1, 9, 200);
+            createItem(1, 9, itemTime);
         }
 
     } else if (player.className == "skin_2" &&                          // если скин 2
@@ -189,19 +190,19 @@ function cacheItem(item) {
             item.offsetLeft + (item.width / 2) < player.offsetLeft + 213 && item.className != 'bomb' && item.className != 'addlife') {
             createBoom(item.offsetTop - 100, item.offsetLeft - 70);
             bildPlain();
-            createItem(1, 9, 200)
+            createItem(1, 9, itemTime)
         } else if (player.offsetLeft + 115 < item.offsetLeft + (item.width / 2) &&      //если ловим бомбу
             item.offsetLeft + (item.width / 2) < player.offsetLeft + 213 && item.className == 'bomb') {
             createBoom(item.offsetTop - 100, item.offsetLeft - 50, "boom");
             die();
             createLifes();
-            createItem(1, 9, 200);
+            createItem(1, 9, itemTime);
         } else if (player.offsetLeft + 115 < item.offsetLeft + (item.width / 2) &&
         item.offsetLeft + (item.width / 2) < player.offsetLeft + 213 && item.className == 'addlife') {
             createBoom(item.offsetTop - 100, item.offsetLeft - 70);
             countLifes++;
             createLifes();
-            createItem(1, 9, 200);
+            createItem(1, 9, itemTime);
         }
     }
 }
