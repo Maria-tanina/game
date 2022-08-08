@@ -185,14 +185,19 @@ function cacheItem(item) {
         player.offsetTop + 124 < item.offsetTop + (item.height / 2) &&
         item.offsetTop + (item.height / 2) < player.offsetTop + 190) {
         if (player.offsetLeft + 115 < item.offsetLeft + (item.width / 2) &&
-            item.offsetLeft + (item.width / 2) < player.offsetLeft + 213 && item.className != 'bomb') {
+            item.offsetLeft + (item.width / 2) < player.offsetLeft + 213 && item.className != 'bomb' && item.className != 'addlife') {
             createBoom(item.offsetTop - 100, item.offsetLeft - 70);
             bildPlain();
             createItem(1, 9, 200)
         } else if (player.offsetLeft + 115 < item.offsetLeft + (item.width / 2) &&      //если ловим бомбу
-            item.offsetLeft + (item.width / 2) < player.offsetLeft + 213) {
+            item.offsetLeft + (item.width / 2) < player.offsetLeft + 213 && item.className == 'bomb') {
             createBoom(item.offsetTop - 100, item.offsetLeft - 50, "boom");
             die();
+            createLifes();
+            createItem(1, 9, 200);
+        } else if (player.offsetLeft + 115 < item.offsetLeft + (item.width / 2) &&
+        item.offsetLeft + (item.width / 2) < player.offsetLeft + 213 && item.className == 'addlife') {
+            countLifes++;
             createLifes();
             createItem(1, 9, 200);
         }
