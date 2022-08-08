@@ -4,7 +4,7 @@ var startBlock = document.querySelector('#start');
 
 const player = document.getElementById('player');
 let countLifes = 5; // счетчик жизней
-let itemTime = 200; // время предметов
+let itemTime = 150; // время предметов
 
 var items = document.querySelector('.items');
 let scorePoints = score.lastElementChild.innerText;
