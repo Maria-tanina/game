@@ -176,6 +176,7 @@ function cacheItem(item) {
             createItem(1, 9, 200);
         } else if (player.offsetLeft + 52 < item.offsetLeft + (item.width / 2) &&
         item.offsetLeft + (item.width / 2) < player.offsetLeft + 152 && item.className == 'addlife') {
+            createBoom(item.offsetTop - 100, item.offsetLeft - 70);
             countLifes++;
             createLifes();
             createItem(1, 9, 200);
@@ -197,6 +198,7 @@ function cacheItem(item) {
             createItem(1, 9, 200);
         } else if (player.offsetLeft + 115 < item.offsetLeft + (item.width / 2) &&
         item.offsetLeft + (item.width / 2) < player.offsetLeft + 213 && item.className == 'addlife') {
+            createBoom(item.offsetTop - 100, item.offsetLeft - 70);
             countLifes++;
             createLifes();
             createItem(1, 9, 200);
