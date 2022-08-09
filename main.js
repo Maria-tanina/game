@@ -209,11 +209,11 @@ function cacheItem(item) {
 
 /* строим байрактар */
 function bildPlain() {
-    if(bird.offsetWidth >= 85) {
+    if(bird.offsetWidth >= 390) {
         score.lastElementChild.innerText = Number(scorePoints) + 1;
         scorePoints = score.lastElementChild.innerText;
         bird.style.width = "0";
     } else {
-        bird.style.width = bird.offsetWidth + 10 +'px'
+        bird.style.width = bird.offsetWidth + 30 +'px'
     }
 }
