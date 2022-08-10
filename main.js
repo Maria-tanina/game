@@ -94,13 +94,33 @@ document.querySelectorAll("#select-player span img").forEach(
 );
 
 /* движуха персонажа */
+let dPressed = false;
+let aPressed = false;
 document.onkeydown = function (event) {
-    if (event.code == "KeyA" && player.offsetLeft > 20) {
-        player.style.left = player.offsetLeft - 100 + "px";
-    } else if (event.code == "KeyD" && player.offsetLeft < event.target.clientWidth - 218) {
-        player.style.left = player.offsetLeft + 100 + "px";
+    if (event.code == "KeyA") {
+        aPressed = true
+    } else if (event.code == "KeyD") {
+        dPressed = true
     }
 };
+document.onkeyup = (event) => {
+    if(event.code == "KeyA") {
+        aPressed = false
+    }
+    if(event.code == "KeyD") {
+        dPressed = false
+    }
+};
+function movePlayer() {
+    if(aPressed && player.offsetLeft > 20) {
+        player.style.left = player.offsetLeft - 30 + "px"
+    }
+    if(dPressed && player.offsetLeft < window.innerWidth - 218) {
+        player.style.left = player.offsetLeft + 30 + "px";
+        console.log(dPressed)
+    }
+};
+setInterval(movePlayer, 80);
 
 /* создание предмета */
 function createItem(min, max, time) {
@@ -214,6 +234,6 @@ function bildPlain() {
         scorePoints = score.lastElementChild.innerText;
         bird.style.width = "0";
     } else {
-        bird.style.width = bird.offsetWidth + 30 +'px'
+        bird.style.width = bird.offsetWidth + 40 +'px'
     }
 }
